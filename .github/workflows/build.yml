@@ -1,0 +1,21 @@
+
+name: Build ROS package
+on:
+  # Run this action whenever a pull request is made
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_test_ros1:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: ros-tooling/setup-ros@0.2.1
+      - uses: ros-tooling/action-ros-ci@0.2.3
+        with:
+          package-name:
+            beginner_tutorials
+            cpp_template_pkg
+          import-token: ${{ secrets.GITHUB_TOKEN }}
+          target-ros1-distro: noetic
